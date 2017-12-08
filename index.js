@@ -4,16 +4,22 @@ function renderResult(item) {
   return `
     <div class="search-result-thumbnail">
       <h2 class="vid-title">${item.snippet.title}</h2>
-      <a href="https://www.youtube.com/watch?v=${item.id.videoId}"><img src="${item.snippet.thumbnails.medium.url}"></a>
+      <a href="https://www.youtube.com/watch?v=${item.id.videoId}"><img alt="Play video: ${item.snippet.title}" src="${item.snippet.thumbnails.medium.url}"></a>
       <a href="https://www.youtube.com/channel/${item.snippet.channelId}">More from ${item.snippet.channelTitle}</a>
     </div>
   `;
 }
 
+function displayTotalResults(num) {
+  return `
+  <h2 class="resultsTotal"> ${num} Total Results</h2>`
+}
+
 function displaySearchResults(data) {
   console.log(JSON.stringify(data));
   const results = data.items.map(renderResult);
-  $('.js-search-results').html(results);
+  const numResults = data.pageInfo.totalResults;
+  $('.js-search-results').html(displayTotalResults(numResults)).append(results).prop('hidden',false);
 }
 
 
@@ -32,7 +38,7 @@ function getDataFromAPI(searchTerm, callback) {
 function watchSubmit() {
   $('.js-search-form').submit(event => {
   event.preventDefault();
-  const queryTarget = $(event.currentTarget).find('.js-query');
+  const queryTarget = $(event.currentTarget).find('#js-query');
   const query = queryTarget.val();
   queryTarget.val("");
   getDataFromAPI(query,displaySearchResults);

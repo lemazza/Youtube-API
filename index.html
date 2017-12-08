@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -14,15 +14,15 @@
     </header>
     <main>
       <form action="#" class="js-search-form">
-        <legend>Search the Youtubes</legend>
-        <input type="search" class="js-query" autofocus placeholder="music videos" required>
+        <label for="query">Search the Youtubes</label>
+        <input type="search" name="query" id="js-query" autofocus placeholder="music videos" required>
         <button type="submit">Search</button>
       </form>
-    <h2>Results</h2>
-    <div class="js-search-results">
-    
+
+    <div class="js-search-results" aria-live="assertive" hidden>
+
     </div>
-    <button type=button class="next-page">Next Page</button>
+  <!--  <button type=button class="next-page">Next Page</button> -->
     
     
     </main>
