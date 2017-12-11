@@ -12,14 +12,14 @@ function renderResult(item) {
 
 function displayTotalResults(num) {
   return `
-  <h2 class="resultsTotal"> ${num} Total Results</h2>`
+  <h2 class="resultsTotal" aria-live="assertive"> ${num} Total Results</h2>`
 }
 
 function displaySearchResults(data) {
   console.log(JSON.stringify(data));
   const results = data.items.map(renderResult);
   const numResults = data.pageInfo.totalResults;
-  $('.js-search-results').html(displayTotalResults(numResults)).append(results).prop('hidden',false);
+  $('.js-search-results').prop('hidden',false).html(displayTotalResults(numResults)).append(results);
 }
 
 
